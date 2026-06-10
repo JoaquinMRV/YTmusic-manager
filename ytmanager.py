@@ -2,14 +2,6 @@
 from ytmusicapi import YTMusic, OAuthCredentials
 
 def should_remove(song, artists_filter=None, titles_filter=None):
-    """
-    Check if song matches filters.
-    :param song: A dict for the song.
-    :param artists_filter: List of artist names (lowercased), or None for no filter.
-    :param titles_filter: List of song titles (lowercased), or None for no filter.
-    :return: True if matches any filter, False otherwise.
-    """
-    # Always check with lowercased values for robustness.
     match_artist = False
     match_title = False
     if artists_filter:
@@ -35,16 +27,11 @@ def main():
     print("Initializing YTMusic...")
     ytmusic = YTMusic("browser.json")
 
-    # Fetch all liked songs
-    # Fetch all liked songs
     print("Fetching liked songs... (this might take a few seconds)")
-    # A high limit tells the library to handle all the scrolling automatically
     results = ytmusic.get_liked_songs(limit=9999) 
     liked_songs = results['tracks']
 
     print(f"Total liked songs found: {len(liked_songs)}")
-
-    # Identify duplicates (by title + artist)
     duplicates = []
     if remove_duplicates:
         seen = {}
@@ -58,8 +45,6 @@ def main():
             else:
                 seen[key] = song
         print(f"Duplicate songs found: {len(duplicates)}")
-
-    # Prepare removal list
     filtered_songs = []
     for song in liked_songs:
         remove_for_filter = should_remove(
@@ -72,7 +57,6 @@ def main():
             filtered_songs.append((song, remove_for_filter, remove_for_duplicate))
 
     print(f"Songs to remove based on filters or duplication: {len(filtered_songs)}")
-    # Proceed with removal
     for idx, (song, filt, dupe) in enumerate(filtered_songs, 1):
         videoId = song.get("videoId")
         title = song.get("title")
