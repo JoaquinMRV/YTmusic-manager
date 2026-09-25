@@ -1,0 +1,11 @@
+# Credentials - NEVER commit these
+browser.json
+oauth.json
+headers_auth.json
+*.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
