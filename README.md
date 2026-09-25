@@ -97,3 +97,7 @@ Two songs count as duplicates when they have the **same title** and the **same s
 - Matching is **partial**: `--artist "queen"` also matches "Queens of the Stone Age". Always check the dry run.
 - Very large libraries can take a while to load. YouTube may also rate-limit you if you remove thousands of songs at once. If it fails, just run it again.
 - This project is not affiliated with YouTube or Google.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
